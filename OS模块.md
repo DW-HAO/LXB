@@ -115,6 +115,92 @@ Python2.txt D:\dir\Python2.txt False
 
 
 
+
+
+## os.walk(path[topdown])		遍历指定路径的所以文件以及文件夹
+
+### path：指定的一个路径（不能为空）
+
+### topdown：遍历顺序从外到内或者从内到外（True：从外到内  False：从内到外  默认为True）
+
+例子
+
+```python
+'''从外到内'''
+import os
+for dirpath, dirnames, filenames in os.walk('./'):
+    print(f'发现文件夹{dirpath}')
+    print("文件夹路径:{}\n子文件夹列表:{}\n文件列表:{}\n".format(dirpath, dirnames, filenames))
+    
+'''从内到外'''
+import os
+for dirpath, dirnames, filenames in os.walk('./', topdown=False):
+    print(f'发现文件夹{dirpath}')
+    print("文件夹路径:{}\n子文件夹列表:{}\n文件列表:{}\n".format(dirpath, dirnames, filenames))
+```
+
+结果
+
+```python
+'''从外到内'''
+发现文件夹./
+文件夹路径:./
+子文件夹列表:['test']
+文件列表:['file_work.py', 'os_mode.py']
+
+发现文件夹./test
+文件夹路径:./test
+子文件夹列表:['test1']
+文件列表:[]
+
+发现文件夹./test\test1
+文件夹路径:./test\test1
+子文件夹列表:[]
+文件列表:['None.py']
+    
+'''从内到外'''
+发现文件夹./test\test1
+文件夹路径:./test\test1
+子文件夹列表:[]
+文件列表:['None.py']
+
+发现文件夹./test
+文件夹路径:./test
+子文件夹列表:['test1']
+文件列表:[]
+
+发现文件夹./
+文件夹路径:./
+子文件夹列表:['test']
+文件列表:['file_work.py', 'os_mode.py']
+```
+
+
+
+
+
+## .startswith()和.endswith()
+
+### 判断字符串是否以指定字符或子字符串开头（结尾）
+
+例子
+
+```python
+print('abc.txt'.startswith('abc'))
+print('abc.txt'.endswith('.txt'))
+print('abc.txt'.startswith('.txt'))
+```
+
+结果
+
+```python
+True
+True
+False
+```
+
+
+
 # 练习：
 
 - 找出'D:\\dir'目录下所有非文件夹的文件
@@ -148,4 +234,3 @@ print("文件夹dir中含有'python'的非文件夹有{}个".format(n))
 <DirEntry '记事本.txt'>
 文件夹dir中含有'python'的非文件夹有3个
 ```
-
